@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentil Mugisha - Portfolio</title>
+    <!-- Font Awesome for icons (for LinkedIn, GitHub, Email, Phone) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic Reset & Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6; /* Light background for contrast */
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Color Palette - Adjusted for a better "blue sky" feel */
+        :root {
+            --primary-color: #66B2FF; /* A brighter, more appealing Sky Blue */
+            --secondary-color: #007ACC; /* A deeper blue for accents, complements primary */
+            --text-dark: #333;
+            --text-light: #f4f7f6;
+            --card-background: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        /* Header/Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .profile-pic-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.3);
+            background-color: #ccc; /* Placeholder background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block; /* Ensure no extra space below image */
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+            background-color: var(--card-background);
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            color: var(--text-dark);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .skill-category {
+            background-color: var(--text-light);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .skill-category h3 {
+            color: var(--secondary-color);
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-category li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .skill-category li:last-child {
+            border-bottom: none;
+        }
+
+        /* Experience & Education */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--primary-color);
+            border: 4px solid var(--text-light);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item-left {
+            left: 0;
+        }
+
+        .timeline-item-right {
+            left: 50%;
+        }
+
+        .timeline-item-right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--card-background);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .timeline-content h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+
+        .timeline-content p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content .date {
+            font-style: italic;
+            color: #777;
+            font-size: 0.85em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .project-card {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card a {
+            text-decoration: none; /* Remove underline from project links */
+            color: inherit; /* Inherit color from parent */
+            display: block; /* Make the entire card clickable */
+        }
+
+        .project-card a:hover h3 {
+            color: var(--primary-color); /* Change color on hover */
+        }
+
+        .project-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            color: var(--text-dark);
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.5em;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+
+            .timeline::after {
+                left: 20px; /* Move timeline to left for mobile */
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 10px;
+            }
+
+            .timeline-item-left, .timeline-item-right {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 10px;
+                right: auto;
+            }
+
+            .timeline-content {
+                border-left: 5px solid var(--primary-color);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .profile-pic-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .contact-item i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header/Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="profile-pic-container">
+                <!-- Replace 'your-photo.jpg' with the actual path to your photo -->
+                <!-- For now, it's a placeholder. You can upload your image and link it here. -->
+                <img src="https://placehold.co/150x150/ADD8E6/000000?text=Your+Photo" alt="Gentil Mugisha" class="profile-pic">
+            </div>
+            <h1>Gentil Mugisha</h1>
+            <p>Aspiring software engineer and current CTO, learning by building. Passionate about technology, web development, and AI committed to growing through real-world projects and leading with curiosity and purpose.</p>
+        </div>
+    </header>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>As the Chief Technical Officer at TechRise Rwanda, I oversee technology strategies and innovation programs focused on coding and AI training. I've led initiatives to empower youth through hands-on education, managing over 100 students and personally teaching over 20, including university students.</p>
+                <p>My journey as an aspiring software engineer is driven by a passion for building scalable solutions and continuous learning through real-world projects. I am dedicated to leading with curiosity and purpose in the evolving tech landscape.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <ul>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>Bootstrap</li>
+                        <li>JavaScript</li>
+                        <li>React.js</li>
+                        <li>Node.js</li>
+                        <li>MongoDB</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Content Management Systems</h3>
+                    <ul>
+                        <li>WordPress</li>
+                        <li>Shopify</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>AI Tools</h3>
+                    <ul>
+                        <li>Proficient in leveraging AI tools for innovative solutions</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>English</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2>Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content">
+                        <h3>Chief Technical Officer</h3>
+                        <p>Techrise Rwanda</p>
+                        <span class="date">Nov 2024 - Present</span>
+                        <p>Oversee technology strategies and innovation programs focused on coding and AI training. Led initiatives to empower youth through hands-on education, managing over 100 students and personally teaching over 20, including university students.</p>
+                    </div>
+                </div>
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-content">
+                        <h3>Web Developer</h3>
+                        <p>Sanson Group</p>
+                        <span class="date">Dec 2024 - Nov 2024</span>
+                        <p>Collaborated with a team to develop and maintain websites, using React.js for interactive features and WordPress for design. Delivered multiple WordPress projects with a focus on user-friendly design and functionality. Managed and completed independent WordPress projects, showcasing creativity in theme customization and performance optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="timeline">
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content">
+                        <h3>Bachelor of Science in Software Engineering</h3>
+                        <p>Adventist University of Central Africa</p>
+                        <span class="date">Jan 2024 - Present</span>
+                        <p>Pursuing a degree in software engineering with a focus on designing, developing, and deploying scalable solutions. Gaining expertise in programming, software methodologies, and modern tools through hands-on projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <a href="https://techriserwanda.org/" target="_blank" rel="noopener noreferrer">
+                        <h3>TechRise Rwanda Website</h3>
+                        <p>Highlights commitment to advancing technology education, innovation, and entrepreneurship among Rwandan youth, equipping them with skills in technology, robotics, and STEM.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://landoclock.com/" target="_blank" rel="noopener noreferrer">
+                        <h3>Land O'clock Website</h3>
+                        <p>A website for Land O'clock, likely related to land services (terrapix).</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://hesltd.art/" target="_blank" rel="noopener noreferrer">
+                        <h3>Hesltd Website</h3>
+                        <p>A trusted leader in civil engineering and construction services in Rwanda, offering construction, interior design, and consultancy with emphasis on quality and client satisfaction.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://mudaheranwa.art/" target="_blank" rel="noopener noreferrer">
+                        <h3>Mudaheranwa Website</h3>
+                        <p>Dedicated to remembering the genocide against the Tutsi and preserving Rwandan history through art and music, promoting events and Musinga Joe's art.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://elegancyservice.art/" target="_blank" rel="noopener noreferrer">
+                        <h3>Elegancy Service Website</h3>
+                        <p>Promotes hospitality services including event management, protocol services, and staffing solutions for weddings, private parties, and corporate events.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://huming-ltd.rw/" target="_blank" rel="noopener noreferrer">
+                        <h3>Huming Ltd Website</h3>
+                        <p>Website for Huming International Factory Ltd, a Rwanda-based company specializing in manufacturing high-quality PVC ceiling panels and other PVC products.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://matheostudio.com/" target="_blank" rel="noopener noreferrer">
+                        <h3>Matheo Studio Website</h3>
+                        <p>An e-commerce site for a fashion brand.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://tourwithche.com/" target="_blank" rel="noopener noreferrer">
+                        <h3>Tourwuthech Website</h3>
+                        <p>A tourism company specializing in unforgettable adventures in East Africa (Rwanda and Uganda), offering intimate wildlife encounters and unique experiences on vast private lands.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://wayupsafaris.com/" target="_blank" rel="noopener noreferrer">
+                        <h3>Wayupsafaris Website</h3>
+                        <p>A travel website providing unique and stress-free travel experiences with customized packages, including safari adventures, hotel booking, car rentals, and guided tours.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://ingoga-auto.com/" target="_blank" rel="noopener noreferrer">
+                        <h3>Ingoga Auto Website</h3>
+                        <p>A multi-market platform for garage services.</p>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="https://terrapix.space/" target="_blank" rel="noopener noreferrer">
+                        <h3>Terrapix Website</h3>
+                        <p>Focuses on providing advanced geospatial data services and machine learning tools, bridging complex spatial data with actionable business intelligence for various industries.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:gentilmugisha178@gmail.com">gentilmugisha178@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+250798814109">(+250) 798 814 109</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/your-github-profile" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Gentil Mugisha. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
